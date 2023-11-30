@@ -12,7 +12,7 @@ import static org.example.lotto.LottoDefaultSettings.*;
 public class LottoNumbersManager {
     private Set<Integer> generatedNumbers = new HashSet<>();
     private Set<Integer> userNumbers = new HashSet<>();
-    void generateNumbers() {
+    protected void generateNumbers() {
         SecureRandom secureRandom = new SecureRandom();
 
         while (generatedNumbers.size() < NUMBERS_TO_DRAW_DEFAULT) {
