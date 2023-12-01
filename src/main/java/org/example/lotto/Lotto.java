@@ -15,8 +15,7 @@ public class Lotto implements Game {
         numbersManager.numberDrawProcess();
         resultsPrinter.printUserNumbers(numbersManager.getUserNumbers());
         resultsPrinter.printGenerateNumbers(numbersManager.getGeneratedNumbers());
-        resultsGame.matchingNumbersFromSets(numbersManager.getUserNumbers(), numbersManager.getGeneratedNumbers());
-        resultsPrinter.countMatchingNumbers();
+        resultsPrinter.countMatchingNumbers(numbersManager.getGeneratedNumbers(), numbersManager.getUserNumbers());
     }
 
 }

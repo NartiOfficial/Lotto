@@ -2,17 +2,21 @@ package org.example.lotto;
 
 import lombok.Getter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 public class LottoResults {
     private int matchingNumbers;
+    private Set<Integer> temp = new HashSet<>();
+
     protected void matchingNumbersFromSets(Set<Integer> userNumbers, Set<Integer> generatedNumbers) {
-        int temp;
-        temp = (int) generatedNumbers.stream()
-                .filter(userNumbers::contains)
-                .count();
-        System.out.println(temp);
-        this.matchingNumbers = temp;
+        temp = new HashSet<>(generatedNumbers);
+        temp.retainAll(userNumbers);
+        setMatchingNumbers(temp.size());
+    }
+
+    private void setMatchingNumbers(int matchingNumbers) {
+        this.matchingNumbers = matchingNumbers;
     }
 }
