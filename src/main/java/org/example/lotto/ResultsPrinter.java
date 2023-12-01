@@ -35,7 +35,7 @@ public class ResultsPrinter {
         }
     }
 
-    private String getCorrectForm(int number) {
+    protected String getCorrectForm(int number) {
         if (number == 1) {
             return "liczba";
         } else if (number >= 2 && number <= 4) {
