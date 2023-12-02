@@ -25,7 +25,6 @@ public class ResultPrinter {
 
     protected void countMatchingNumbers(Set<Integer> generatedNumbers, Set<Integer> userNumbers) {
         results.matchingNumbersFromSets(generatedNumbers, userNumbers);
-
         System.out.printf("\nGracz trafił %d %s, ", results.getMatchingNumbers(), getCorrectForm(results.getMatchingNumbers()));
         switch (results.getMatchingNumbers()) {
             case 1 -> System.out.printf("%s wygrywająca: %s.", getCorrectForm(1), results.getTemp());
