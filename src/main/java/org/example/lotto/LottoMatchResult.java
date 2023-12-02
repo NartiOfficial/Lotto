@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Getter
-public class LottoResults {
+public class LottoMatchResult {
     private int matchingNumbers;
     private Set<Integer> temp = new HashSet<>();
 

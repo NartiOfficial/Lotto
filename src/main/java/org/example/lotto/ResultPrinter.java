@@ -3,8 +3,8 @@ package org.example.lotto;
 import java.util.Comparator;
 import java.util.Set;
 
-public class ResultsPrinter {
-    private LottoResults results = new LottoResults();
+public class ResultPrinter {
+    private LottoMatchResult results = new LottoMatchResult();
 
     protected void printGenerateNumbers(Set<Integer> set) {
         System.out.print("\nWylosowane liczby: ");
@@ -28,11 +28,20 @@ public class ResultsPrinter {
 
         System.out.printf("\nGracz trafił %d %s, ", results.getMatchingNumbers(), getCorrectForm(results.getMatchingNumbers()));
         switch (results.getMatchingNumbers()) {
-            case 1 -> System.out.printf("%s wygrywająca: %s", getCorrectForm(1), results.getTemp());
-            case 2, 3, 4, 5 -> System.out.printf("%s wygrywające: %s", getCorrectForm(results.getMatchingNumbers()), results.getTemp());
-            case 6 -> System.out.printf("wszystkie %s wygrywają! Liczby wygrywające: %s", getCorrectForm(results.getMatchingNumbers()), results.getTemp());
-            default -> System.out.printf("brak wygrywających %s", getCorrectForm(0));
+            case 1 -> System.out.printf("%s wygrywająca: %s.", getCorrectForm(1), results.getTemp());
+            case 2, 3, 4, 5 -> System.out.printf("%s wygrywające: %s.", getCorrectForm(results.getMatchingNumbers()), results.getTemp());
+            case 6 -> System.out.printf("wszystkie %s wygrywają! Liczby wygrywające: %s.", getCorrectForm(results.getMatchingNumbers()), results.getTemp());
+            default -> System.out.printf("brak wygrywających %s.", getCorrectForm(0));
         }
+    }
+
+    protected void numberDrawProcess(Set<Integer> generatedNumbers) {
+        generatedNumbers.stream()
+                .peek(number -> {
+                    System.out.println("Trwa losowanie liczby...");
+                    System.out.println("Wylosowana liczba to: " + number);
+                })
+                .forEach(number -> {});
     }
 
     protected String getCorrectForm(int number) {

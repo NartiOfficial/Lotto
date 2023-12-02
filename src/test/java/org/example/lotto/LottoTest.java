@@ -6,33 +6,37 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class LottoTest {
-    LottoNumbersManager numbersManager = mock(LottoNumbersManager.class);
+    //given
+    LottoNumberGenerator numbersManager = mock(LottoNumberGenerator.class);
     UserInputManager userInputManager = mock(UserInputManager.class);
-    ResultsPrinter resultsPrinter = mock(ResultsPrinter.class);
-
-    Lotto testLotto = new Lotto(numbersManager, userInputManager, resultsPrinter);
+    ResultPrinter resultPrinter = mock(ResultPrinter.class);
+    Lotto testLotto = new Lotto(numbersManager, userInputManager, resultPrinter);
 
     @Test
-    public void testInteractionWithDependencies() {
+    public void shouldInteractWithDependenciesWhenPlayIsCalled() {
+        //given
         doNothing().when(userInputManager).submitTicket(any());
-
+        //when
         testLotto.play();
-
+        //then
         verify(userInputManager, times(1)).submitTicket(any());
         verify(numbersManager, times(1)).generateNumbers();
-        verify(numbersManager, times(1)).numberDrawProcess();
-        verify(resultsPrinter, times(1)).printUserNumbers(any());
-        verify(resultsPrinter, times(1)).printGenerateNumbers(any());
-        verify(resultsPrinter, times(1)).countMatchingNumbers(any(), any());
+        verify(resultPrinter, times(1)).numberDrawProcess(any());
+        verify(resultPrinter, times(1)).printUserNumbers(any());
+        verify(resultPrinter, times(1)).printGenerateNumbers(any());
+        verify(resultPrinter, times(1)).countMatchingNumbers(any(), any());
     }
 
     @Test
-    public void testErrorHandling() {
+    public void shouldThrowExceptionWhenErrorOccurs() {
+        //given
         doThrow(new RuntimeException("Test error")).when(userInputManager).submitTicket(any());
-
+        //when
         try {
             testLotto.play();
-        } catch (RuntimeException e) {
+        }
+        //then
+        catch (RuntimeException e) {
             assertEquals("Test error", e.getMessage());
         }
     }

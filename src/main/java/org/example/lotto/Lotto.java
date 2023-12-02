@@ -2,24 +2,23 @@ package org.example.lotto;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.example.Game;
+import org.example.interfaces.Game;
 
 @NoArgsConstructor
 @AllArgsConstructor
 public class Lotto implements Game {
-    private LottoNumbersManager numbersManager = new LottoNumbersManager();
-    private UserInputManager userInputManager = new UserInputManager();
-    private ResultsPrinter resultsPrinter = new ResultsPrinter();
+    private LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+    private UserInputManager ticketSubmitter = new UserInputManager();
+    private ResultPrinter resultDisplayer = new ResultPrinter();
 
 
     @Override
     public void play() {
-        userInputManager.submitTicket(numbersManager.getUserNumbers());
-        numbersManager.generateNumbers();
-        numbersManager.numberDrawProcess();
-        resultsPrinter.printUserNumbers(numbersManager.getUserNumbers());
-        resultsPrinter.printGenerateNumbers(numbersManager.getGeneratedNumbers());
-        resultsPrinter.countMatchingNumbers(numbersManager.getGeneratedNumbers(), numbersManager.getUserNumbers());
+        ticketSubmitter.submitTicket(lottoNumberGenerator.getUserNumbers());
+        lottoNumberGenerator.generateNumbers();
+        resultDisplayer.numberDrawProcess(lottoNumberGenerator.getGeneratedNumbers());
+        resultDisplayer.printUserNumbers(lottoNumberGenerator.getUserNumbers());
+        resultDisplayer.printGenerateNumbers(lottoNumberGenerator.getGeneratedNumbers());
+        resultDisplayer.countMatchingNumbers(lottoNumberGenerator.getGeneratedNumbers(), lottoNumberGenerator.getUserNumbers());
     }
-
 }

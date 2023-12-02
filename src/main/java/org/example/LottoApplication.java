@@ -2,9 +2,9 @@ package org.example;
 
 import org.example.lotto.Lotto;
 
-public class Main {
+public class LottoApplication {
     public static void main(String[] args) {
-        Lotto lotto = new Lotto();
-        lotto.play();
+        Lotto lottoGame = new Lotto();
+        lottoGame.play();
     }
 }

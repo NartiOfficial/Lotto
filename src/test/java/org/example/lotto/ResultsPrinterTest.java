@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ResultsPrinterTest {
     @Test
-    public void testGetCorrectForm() {
-        ResultsPrinter printer = new ResultsPrinter();
+    public void shouldGetCorrectForm() {
+        ResultPrinter printer = new ResultPrinter();
         assertEquals("liczba", printer.getCorrectForm(1));
         assertEquals("liczby", printer.getCorrectForm(2));
         assertEquals("liczby", printer.getCorrectForm(3));
@@ -19,11 +19,23 @@ public class ResultsPrinterTest {
     }
 
     @Test
-    public void testPrintMethods() {
-        ResultsPrinter printer = new ResultsPrinter();
+    public void shouldPrintGeneratedNumbers() {
+        ResultPrinter printer = new ResultPrinter();
         Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
         assertDoesNotThrow(() -> printer.printGenerateNumbers(numbers));
+    }
+
+    @Test
+    public void shouldPrintUserNumbers() {
+        ResultPrinter printer = new ResultPrinter();
+        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
         assertDoesNotThrow(() -> printer.printUserNumbers(numbers));
+    }
+
+    @Test
+    public void shouldCountMatchingNumbers() {
+        ResultPrinter printer = new ResultPrinter();
+        Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
         assertDoesNotThrow(() -> printer.countMatchingNumbers(numbers, numbers));
     }
 }
