@@ -15,11 +15,11 @@ public class LottoTest {
     @Test
     public void shouldInteractWithDependenciesWhenPlayIsCalled() {
         //given
-        doNothing().when(ticketSubmitter).submitTicket(any(), any());
+        doNothing().when(ticketSubmitter).submitTicket(any());
         //when
         testLotto.play();
         //then
-        verify(ticketSubmitter, times(1)).submitTicket(any(), any());
+        verify(ticketSubmitter, times(1)).submitTicket(any());
         verify(lottoNumberGenerator, times(1)).generateNumbers();
         verify(resultDisplayer, times(1)).numberDrawProcess(any());
         verify(resultDisplayer, times(1)).printUserNumbers(any());
@@ -30,7 +30,7 @@ public class LottoTest {
     @Test
     public void shouldThrowExceptionWhenErrorOccurs() {
         //given
-        doThrow(new RuntimeException("Test error")).when(ticketSubmitter).submitTicket(any(), any());
+        doThrow(new RuntimeException("Test error")).when(ticketSubmitter).submitTicket(any());
         //when
         try {
             testLotto.play();

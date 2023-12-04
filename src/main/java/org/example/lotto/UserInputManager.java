@@ -15,7 +15,7 @@ import static org.example.lotto.LottoDefaultSettings.*;
 public class UserInputManager {
     private BufferedReader reader;
 
-    protected void submitTicket(BufferedReader reader, Set<Integer> set) {
+    protected void submitTicket(Set<Integer> set) {
         reader = new BufferedReader(new InputStreamReader(System.in));
 
         while (set.size() < NUMBERS_TO_PICK_DEFAULT) {

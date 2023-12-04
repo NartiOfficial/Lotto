@@ -15,7 +15,7 @@ public class Lotto implements Game {
 
     @Override
     public void play() {
-        ticketSubmitter.submitTicket(new BufferedReader(new InputStreamReader(System.in)), lottoNumberGenerator.getUserNumbers());
+        ticketSubmitter.submitTicket(lottoNumberGenerator.getUserNumbers());
         lottoNumberGenerator.generateNumbers();
         resultDisplayer.numberDrawProcess(lottoNumberGenerator.getGeneratedNumbers());
         resultDisplayer.printUserNumbers(lottoNumberGenerator.getUserNumbers());
