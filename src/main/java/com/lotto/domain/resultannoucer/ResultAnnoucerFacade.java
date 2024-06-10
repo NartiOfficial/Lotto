@@ -1,4 +1,4 @@
 package com.lotto.domain.resultannoucer;
 
-class ResultAnnoucerFacade {
+public class ResultAnnoucerFacade {
 }
