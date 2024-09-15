@@ -235,4 +235,22 @@ public class NumberReceiverFacadeTest {
         // Then
         assertThat(allTicketsByDate).isEmpty();
     }
+
+
+    @Test
+    @DisplayName("It Should Return Next Draw Date")
+    public void it_should_return_next_draw_date() {
+        // Given
+        Clock clock = Clock.fixed(LocalDateTime.of(2022, 11, 19, 10, 0, 0).toInstant(ZoneOffset.UTC), ZoneId.of("Europe/London"));
+        HashGenerable hashGenerator = new HashGenerator();
+        NumberReceiverFacade numberReceiverFacade = new NumberReceiverConfiguration().createForTest(hashGenerator, clock, ticketRepository);
+
+        // When
+        LocalDateTime testedDrawDate = numberReceiverFacade.retrieveNextDrawDate();
+
+        // Then
+        LocalDateTime expectedDrawDate = LocalDateTime.of(2022, 11, 19, 12, 0, 0);
+        assertThat(testedDrawDate).isEqualTo(expectedDrawDate);
+    }
+
 }
