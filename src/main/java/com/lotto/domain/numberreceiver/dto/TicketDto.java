@@ -9,5 +9,7 @@ import java.util.Set;
 public record TicketDto(
         String hash,
         Set<Integer> numbers,
-        LocalDateTime drawDate) {
+        LocalDateTime drawDate,
+        String message,
+        Integer age) {
 }
