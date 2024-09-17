@@ -19,13 +19,12 @@ public class WinningNumbersGeneratorFacadeTest {
 
     private final WinningNumbersRepository winningNumbersRepository = new WinningNumbersRepositoryTestImpl();
     NumberReceiverFacade numberReceiverFacade = mock(NumberReceiverFacade.class);
-    private final OneRandomNumberFetcher fetcher = new SecureRandomOneNumberFetcher();
 
     @Test
     @DisplayName("It Should Return Set Of Required Size")
     public void it_should_return_set_of_required_size() {
         // Given
-        RandomNumberGenerable generator = new RandomGenerator(fetcher);
+        RandomNumberGenerable generator = new WinningNumberGeneratorTestImpl();
         when(numberReceiverFacade.retrieveNextDrawDate()).thenReturn(LocalDateTime.now());
         WinningNumbersGeneratorFacade numbersGenerator = new NumberGeneratorConfiguration().createForTest(generator, winningNumbersRepository, numberReceiverFacade);
 
@@ -40,7 +39,7 @@ public class WinningNumbersGeneratorFacadeTest {
     @DisplayName("It Should Return Set Of Required Size Within Required Range")
     public void it_should_return_set_of_required_size_within_required_range() {
         // Given
-        RandomNumberGenerable generator = new RandomGenerator(fetcher);
+        RandomNumberGenerable generator = new WinningNumberGeneratorTestImpl();
         when(numberReceiverFacade.retrieveNextDrawDate()).thenReturn(LocalDateTime.now());
         WinningNumbersGeneratorFacade numbersGenerator = new NumberGeneratorConfiguration().createForTest(generator, winningNumbersRepository, numberReceiverFacade);
 

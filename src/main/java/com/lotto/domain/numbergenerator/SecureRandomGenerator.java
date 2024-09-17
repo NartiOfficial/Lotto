@@ -5,26 +5,22 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-class RandomGenerator implements RandomNumberGenerable {
+class SecureRandomGenerator implements RandomNumberGenerable {
 
     private static final int LOWER_BAND = 1;
     private static final int UPPER_BAND = 99;
 
-    private final OneRandomNumberFetcher client;
-
-    RandomGenerator(OneRandomNumberFetcher client) {
-        this.client = client;
-    }
-
     @Override
-    public Set<Integer> generateSixRandomNumbers() {
+    public SixRandomNumbersDto generateSixRandomNumbers() {
         Set<Integer> winningNumbers = new HashSet<>();
         while (isAmountOfNumbersLowerThanSix(winningNumbers)) {
-            OneRandomNumberResponseDto randomNumberResponseDto = client.retrieveOneRandomNumber(LOWER_BAND, UPPER_BAND);
-            int randomNumber = randomNumberResponseDto.number();
-            winningNumbers.add(randomNumber);
+            Random random = new SecureRandom();
+            int number = random.nextInt((UPPER_BAND - LOWER_BAND) + 1);
+            winningNumbers.add(number);
         }
-        return winningNumbers;
+        return SixRandomNumbersDto.builder()
+                .numbers(winningNumbers)
+                .build();
     }
 
     private boolean isAmountOfNumbersLowerThanSix(Set<Integer> winningNumbers) {
