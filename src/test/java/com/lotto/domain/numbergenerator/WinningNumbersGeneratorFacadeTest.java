@@ -51,7 +51,7 @@ public class WinningNumbersGeneratorFacadeTest {
         int upperBand = 99;
         int lowerBand = 1;
         Set<Integer> winningNumbers = generatedNumbers.getWinningNumbers();
-        boolean numbersInRange = winningNumbers.stream().allMatch(number -> number >= lowerBand && number <= upperBand);
+        boolean numbersInRange = winningNumbers.stream().allMatch(number -> (number >= lowerBand) && (number <= upperBand));
         assertThat(numbersInRange).isTrue();
 
     }
