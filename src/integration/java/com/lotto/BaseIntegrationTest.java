@@ -1,5 +1,6 @@
 package com.lotto;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import org.testcontainers.utility.DockerImageName;
 
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
@@ -31,10 +31,11 @@ public class BaseIntegrationTest {
     @Container
     public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
 
+    @Autowired
     public ObjectMapper objectMapper;
 
     @RegisterExtension
-    public static WireMockExtension wireMockExtension = WireMockExtension.newInstance()
+    public static WireMockExtension wireMockServer = WireMockExtension.newInstance()
             .options(wireMockConfig().dynamicPort())
             .build();
 
@@ -42,4 +43,5 @@ public class BaseIntegrationTest {
     public static void propertyOverride(DynamicPropertyRegistry registry) {
         registry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
     }
+
 }
