@@ -3,6 +3,7 @@ package com.lotto.domain.numberreceiver;
 import com.lotto.domain.numberreceiver.dto.NumberReceiverResponseDto;
 import com.lotto.domain.numberreceiver.dto.TicketDto;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
