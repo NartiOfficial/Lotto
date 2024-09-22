@@ -5,5 +5,5 @@ import lombok.Builder;
 import java.util.Set;
 
 @Builder
-record SixRandomNumbersDto(Set<Integer> numbers) {
+public record SixRandomNumbersDto(Set<Integer> numbers) {
 }
