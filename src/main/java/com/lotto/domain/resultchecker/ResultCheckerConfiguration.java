@@ -3,7 +3,7 @@ package com.lotto.domain.resultchecker;
 import com.lotto.domain.numbergenerator.WinningNumbersGeneratorFacade;
 import com.lotto.domain.numberreceiver.NumberReceiverFacade;
 
-class ResultCheckerConfiguration {
+public class ResultCheckerConfiguration {
 
     ResultCheckerFacade createForTest(WinningNumbersGeneratorFacade generatorFacade, NumberReceiverFacade receiverFacade, PlayerRepository playerRepository) {
         WinnersRetriever winnerGenerator = new WinnersRetriever();

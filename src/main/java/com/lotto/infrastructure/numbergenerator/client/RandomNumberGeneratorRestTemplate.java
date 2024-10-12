@@ -51,8 +51,8 @@ public class RandomNumberGeneratorRestTemplate implements RandomNumberGenerable 
 
     private ResponseEntity<List<Integer>> makeGetRequest(int count, int lowerBand, int upperBand, HttpEntity<HttpHeaders> requestEntity) {
         final String url = UriComponentsBuilder.fromHttpUrl(getUrlForService(RANDOM_NUMBER_SERVICE_PATH))
-                .queryParam("min", lowerBand)
-                .queryParam("max", upperBand)
+                .queryParam("lowerBand", lowerBand)
+                .queryParam("upperBand", upperBand)
                 .queryParam("count", count)
                 .toUriString();
         ResponseEntity<List<Integer>> response = restTemplate.exchange(

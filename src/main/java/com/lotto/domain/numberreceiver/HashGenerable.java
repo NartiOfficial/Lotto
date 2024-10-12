@@ -1,6 +1,6 @@
 package com.lotto.domain.numberreceiver;
 
-interface HashGenerable {
+public interface HashGenerable {
 
     String getHash();
 }

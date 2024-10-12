@@ -13,6 +13,8 @@ public class RandomGeneratorClientConfig {
     public RestTemplateResponseErrorHandler restTemplateResponseErrorHandler() {
         return new RestTemplateResponseErrorHandler();
     }
+
+    @Bean
     public RestTemplate restTemplate(@Value("${lotto.number-generator.http.client.config.connectionTimeout:1000}") long connectionTimeout,
                                      @Value("${lotto.number-generator.http.client.config.readTimeout:1000}") long readTimeout,
                                      RestTemplateResponseErrorHandler restTemplateResponseErrorHandler) {
