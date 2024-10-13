@@ -6,6 +6,9 @@ spring:
     name: Lotto
   main:
     allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 lotto:
   number-generator:
@@ -21,3 +24,4 @@ lotto:
           port: 9090
           connectionTimeout: 5000
           readTimeout: 5000
+
