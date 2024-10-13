@@ -4,16 +4,20 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import com.lotto.BaseIntegrationTest;
 import com.lotto.domain.numbergenerator.WinningNumbersGeneratorFacade;
 import com.lotto.domain.numbergenerator.WinningNumbersNotFoundException;
+import com.lotto.domain.numberreceiver.dto.NumberReceiverResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -40,7 +44,7 @@ public class UserPlayedLottoAndWonIntegrationTest extends BaseIntegrationTest {
     //  Step 2: System fetched winning numbers for draw date: 19.11.2022 12:00
 
         // Given
-        LocalDateTime drawDate = LocalDateTime.of(2022, 10, 19, 12, 0, 0);
+        LocalDateTime drawDate = LocalDateTime.of(2022, 11, 19, 12, 0, 0);
 
         // When && Then
         await()
@@ -60,17 +64,23 @@ public class UserPlayedLottoAndWonIntegrationTest extends BaseIntegrationTest {
         // Given
 
         // When
-        final ResultActions perform = mockMvc.perform(post("inputNumbers")
+        final ResultActions perform = mockMvc.perform(post("/inputNumbers")
                 .content("""
-                        {
-                        "inputNumbers": [1,2,3,4,5,6]
+                        "inputNumbers": [1,2,30,50,55,61]
                         }
-                        """
+                        """.trim()
                 ).contentType(MediaType.APPLICATION_JSON)
         );
 
         // Then
-        perform.andExpect(status().isOk());
+        MvcResult mvcResult = perform.andExpect(status().isOk()).andReturn();
+        String json = mvcResult.getResponse().getContentAsString();
+        NumberReceiverResponseDto numberReceiverResponseDto = objectMapper.readValue(json, NumberReceiverResponseDto.class);
+        assertAll(
+                () -> assertThat(numberReceiverResponseDto.ticketDto().drawDate()).isEqualTo(drawDate),
+                () -> assertThat(numberReceiverResponseDto.ticketDto().hash()).isNotNull(),
+                () -> assertThat(numberReceiverResponseDto.message()).isEqualTo("SUCCESS")
+        );
 
     //  Step 4: 3 days and 1 minute passed, and it is 1 minute after the draw date (19.11.2022 12:01)
     //  Step 5: System generated result for TicketId: sampleTicketId with draw date 19.11.2022 12:00, and saved it with 6 hits
