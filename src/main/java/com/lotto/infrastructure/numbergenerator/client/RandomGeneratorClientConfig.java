@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 import com.lotto.domain.numbergenerator.RandomNumberGenerable;
 
+@Configuration
 public class RandomGeneratorClientConfig {
     @Bean
     public RestTemplateResponseErrorHandler restTemplateResponseErrorHandler() {

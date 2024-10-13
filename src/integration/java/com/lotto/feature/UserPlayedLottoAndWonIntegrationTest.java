@@ -33,12 +33,12 @@ public class UserPlayedLottoAndWonIntegrationTest extends BaseIntegrationTest {
         // When
         // Then
 
-    //  Step 2: System fetched winning numbers for draw date: 19.11.2022 12:00
+    //  Step 2: System fetched winning numbers for draw date: 12.10.2024 12:00
 
         // Given
         LocalDateTime drawDate = LocalDateTime.of(2024, 10,12,0,0);
 
-        // When
+        // When && Then
         await()
                 .atMost(Duration.ofSeconds(20))
                 .pollInterval(Duration.ofSeconds(1))
@@ -50,8 +50,6 @@ public class UserPlayedLottoAndWonIntegrationTest extends BaseIntegrationTest {
                         }
                     }
                 );
-        // Then
-
 
     //  Step 3: User made POST /inputNumbers with 6 numbers (1, 2, 3, 4, 5, 6) at 16-11-2022 10:00 and system returned OK(200) with message: “success” and Ticket (DrawDate:19.11.2022 12:00 (Saturday), TicketId: sampleTicketId)
     //  Step 4: 3 days and 1 minute passed, and it is 1 minute after the draw date (19.11.2022 12:01)
