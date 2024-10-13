@@ -4,6 +4,8 @@ spring:
       uri: mongodb://admin:admin@localhost:27017/lotto-web
   application:
     name: Lotto
+  main:
+    allow-bean-definition-overriding: true
 
 lotto:
   number-generator:
