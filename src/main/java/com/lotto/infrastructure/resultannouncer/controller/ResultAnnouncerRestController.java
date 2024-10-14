@@ -1,4 +1,4 @@
-package com.lotto.infrastructure.resultannouncer.contoller;
+package com.lotto.infrastructure.resultannouncer.controller;
 
 import com.lotto.domain.resultannouncer.ResultAnnouncerFacade;
 import com.lotto.domain.resultannouncer.dto.ResultAnnouncerResponseDto;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-class ResultAnnouncerRestContoller {
+class ResultAnnouncerRestController {
 
     ResultAnnouncerFacade resultAnnouncerFacade;
 

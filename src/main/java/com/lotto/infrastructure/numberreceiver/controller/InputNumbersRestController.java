@@ -1,4 +1,4 @@
-package com.lotto.infrastructure.numberreceiver.contoller;
+package com.lotto.infrastructure.numberreceiver.controller;
 
 import com.lotto.domain.numberreceiver.NumberReceiverFacade;
 import com.lotto.domain.numberreceiver.dto.NumberReceiverResponseDto;

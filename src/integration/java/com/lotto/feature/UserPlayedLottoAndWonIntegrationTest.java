@@ -65,8 +65,9 @@ public class UserPlayedLottoAndWonIntegrationTest extends BaseIntegrationTest {
     //  Step 3: User made POST /inputNumbers with 6 numbers (1, 2, 3, 4, 5, 6) at 16-11-2022 10:00 and system returned OK(200) with message: “success” and Ticket (DrawDate:19.11.2022 12:00 (Saturday), TicketId: sampleTicketId)
         // Given
         // When
-        final ResultActions performPostInputNumbers = mockMvc.perform(post("/inputNumbers")
+        ResultActions performPostInputNumbers = mockMvc.perform(post("/inputNumbers")
                 .content("""
+                        {
                         "inputNumbers": [1,2,30,50,55,61]
                         }
                         """.trim()
@@ -93,7 +94,7 @@ public class UserPlayedLottoAndWonIntegrationTest extends BaseIntegrationTest {
                         """
                         {
                         "message": "Not found for id: notExistingId",
-                        "status": "NOT_FOUND"
+                        "httpStatus": "NOT_FOUND"
                         }
                         """.trim()
                 ));

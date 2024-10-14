@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class PlayerRepositoryTestImpl implements PlayerRepository {
 
@@ -78,7 +80,10 @@ public class PlayerRepositoryTestImpl implements PlayerRepository {
 
     @Override
     public <S extends Player> List<S> saveAll(final Iterable<S> entities) {
-        return List.of();
+        Stream<S> stream = StreamSupport.stream(entities.spliterator(), false);
+        List<S> list = stream.toList();
+        list.forEach(player -> playersList.put(player.hash(), player));
+        return list;
     }
 
     @Override
